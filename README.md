@@ -31,6 +31,24 @@ This platform is not just a simple chatbot. It uses an enterprise-grade backend 
 
 ---
 
+## 🏗️ System Diagram & Schema
+
+![System Architecture & Edge Cases](./system_diagram.png)
+
+### Core Database Schema (PostgreSQL)
+- **Users**: `id` (PK), `phone_number` (Unique), `name`, `created_at`
+- **Conversations**: `id` (PK), `user_id` (FK), `status` (active/closed), `last_message_at`, `created_at`
+- **Messages**: `id` (PK), `conversation_id` (FK), `sender` (user/ai), `content` (text), `message_type`, `twilio_sid` (Unique for Idempotency), `created_at`
+- **Memory**: `id` (PK), `user_id` (FK), `type` (short_term | long_term | behavioral), `key`, `value` (JSONB), `updated_at`
+
+### 🛡️ Edge Cases Handled
+1. **Duplicate Messages (Retries)**: Prevented using Idempotency keys (`twilio_sid` / Telegram message IDs).
+2. **AI Hallucination**: Handled by forcing strict tool-based JSON responses for critical queries (like order tracking).
+3. **Slow AI Responses**: Handled gracefully using the async queue architecture and fallback "We're checking this..." messages if necessary.
+4. **Multi-language Support (India-specific)**: The AI is prompted to automatically detect the user's language and respond in the same language.
+
+---
+
 ## 🛠️ Prerequisites
 
 Before you begin, ensure you have the following accounts and tools ready:

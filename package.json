@@ -15,14 +15,14 @@
     "dotenv": "^16.4.5",
     "hono": "^4.3.7",
     "ioredis": "^5.4.1",
-    "pg": "^8.11.5"
-  },
-  "devDependencies": {
+    "pg": "^8.11.5",
     "@types/localtunnel": "^2.0.4",
     "@types/node": "^20.12.11",
     "@types/pg": "^8.11.6",
     "localtunnel": "^2.0.2",
-    "tsx": "^4.10.5",
     "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "tsx": "^4.10.5"
   }
 }

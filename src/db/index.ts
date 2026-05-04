@@ -7,7 +7,7 @@ export const pool = new Pool({
   ssl: process.env.DATABASE_URL?.includes('supabase') ? { rejectUnauthorized: false } : undefined,
 });
 
-pool.on('error', (err, client) => {
+pool.on('error', (err: Error, client: any) => {
   console.error('Unexpected error on idle client', err);
   process.exit(-1);
 });

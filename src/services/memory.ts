@@ -117,5 +117,5 @@ export async function getMemory(userId: string, type: 'short_term' | 'long_term'
     `SELECT key, value FROM memory WHERE user_id = $1 AND type = $2`,
     [userId, type]
   );
-  return result.rows.reduce((acc, row) => ({ ...acc, [row.key]: row.value }), {});
+  return result.rows.reduce((acc: any, row: any) => ({ ...acc, [row.key]: row.value }), {});
 }
